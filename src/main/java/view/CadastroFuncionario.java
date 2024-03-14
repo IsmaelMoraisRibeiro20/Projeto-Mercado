@@ -13,16 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 public class CadastroFuncionario extends JanelaPadrao{
 
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JButton btnNewButton;
+	private JTextField campoNome;
+	private JTextField campoTelefone;
+	private JTextField campoEmail;
+	private JTextField campoCPF;
+	private JButton buttonVoltar;
 	private JButton btnSalvar;
 
 	
@@ -67,47 +62,47 @@ public class CadastroFuncionario extends JanelaPadrao{
 	}
 	
 	public void criarJTextField() {
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(263, 145, 286, 34);
-		getContentPane().add(textField);
+		campoNome = new JTextField();
+		campoNome.setColumns(10);
+		campoNome.setBounds(263, 145, 286, 34);
+		getContentPane().add(campoNome);
 	
 		
 		try {
 			MaskFormatter mascaraDeTelefone = new MaskFormatter("(##) #####-####");
-			textField_1 = new JFormattedTextField(mascaraDeTelefone);
-			textField_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			textField_1.setBounds(263, 215, 286, 34);
+			campoTelefone = new JFormattedTextField(mascaraDeTelefone);
+			campoTelefone.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			campoTelefone.setBounds(263, 215, 286, 34);
 
-			getContentPane().add(textField_1);
+			getContentPane().add(campoTelefone);
 		} catch (ParseException e) {
 
 			e.printStackTrace();
 		}
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(263, 291, 286, 34);
-		getContentPane().add(textField_2);
+		campoEmail = new JTextField();
+		campoEmail.setColumns(10);
+		campoEmail.setBounds(263, 291, 286, 34);
+		getContentPane().add(campoEmail);
 		
 		try {
 			MaskFormatter mascaraDeCPF = new MaskFormatter("###.###.###-##");
-			textField_3 = new JFormattedTextField(mascaraDeCPF);
-			textField_3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-			((JFormattedTextField) textField_3).setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
-			textField_3.setBounds(263, 370, 286, 34);
-			getContentPane().add(textField_3);
+			campoCPF = new JFormattedTextField(mascaraDeCPF);
+			campoCPF.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			((JFormattedTextField) campoCPF).setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+			campoCPF.setBounds(263, 370, 286, 34);
+			getContentPane().add(campoCPF);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void criarButton() {
-		btnNewButton = new JButton("Voltar");
-		btnNewButton.setBackground(new Color(255, 255, 255));
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnNewButton.setBounds(263, 427, 116, 31);
-		getContentPane().add(btnNewButton);
+		buttonVoltar = new JButton("Voltar");
+		buttonVoltar.setBackground(new Color(255, 255, 255));
+		buttonVoltar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		buttonVoltar.setBounds(263, 427, 116, 31);
+		getContentPane().add(buttonVoltar);
 		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setBackground(new Color(240, 240, 240));

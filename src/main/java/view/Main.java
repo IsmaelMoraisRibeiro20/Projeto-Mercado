@@ -35,7 +35,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastroFuncionario frame = new CadastroFuncionario();
+					new Menu();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
