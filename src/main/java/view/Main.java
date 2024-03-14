@@ -35,8 +35,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Menu frame = new Menu();
-					frame.setVisible(true);
+					new Menu();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
