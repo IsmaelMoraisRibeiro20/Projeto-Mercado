@@ -4,8 +4,8 @@
   <persistence-unit name="meuPU"
 		transaction-type="RESOURCE_LOCAL">
 	
-		<class>model.Funcionario</class>
-		<class>model.Produto</class>
+	<!-- <class>model.Funcionario</class>
+		<class>model.Produto</class> -->	
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
