@@ -3,28 +3,30 @@ package view;
 import java.awt.Color;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-
 import java.awt.Font;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.ProdutoDAO;
+import DTO.ProdutoDTO;
+import controler.ProdutoController;
 import util.ButtonEditor;
 import util.ButtonRenderer;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 
 public class ListagemProdutos extends JanelaPadrao {
 
-	
 	private JTable table;
 	private JButton btnVoltar;
 	private DefaultTableModel modelo;
-
-
+	
 	public ListagemProdutos() {
 		criarJLabel();
 		criarJTable();
@@ -40,16 +42,26 @@ public class ListagemProdutos extends JanelaPadrao {
 		getContentPane().add(lblProdutos);
 		
 	}
+
+	public void criarJButton() {
+		OuvinteBotaoVoltar ouvinte = new OuvinteBotaoVoltar(this);
+		btnVoltar = new JButton("Voltar");
+		btnVoltar.setIcon(new ImageIcon("C:\\Users\\ismae\\OneDrive\\Documentos\\ws-eclipse1\\br.com.projetoBD\\imagens\\voltar.png"));
+		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnVoltar.setBounds(46, 443, 115, 31);
+		btnVoltar.addActionListener(ouvinte);
+		getContentPane().add(btnVoltar);
+	}
 	
 	public void criarJTable() {
-	
+		
 		modelo = new DefaultTableModel();
+		modelo.addColumn("Código");
 		modelo.addColumn("Nome");
 		modelo.addColumn("Quantidade");
 		modelo.addColumn("Descrição");
 		modelo.addColumn("Valor");
 		modelo.addColumn("Editar");
-		modelo.addColumn("Detalhar");
 		modelo.addColumn("Excluir");
 
 		table = new JTable(modelo);
@@ -57,12 +69,8 @@ public class ListagemProdutos extends JanelaPadrao {
 		table.getColumn("Editar").setCellRenderer(new ButtonRenderer());
 		table.getColumn("Editar").setCellEditor(new ButtonEditor(new JCheckBox()));
 
-		table.getColumn("Detalhar").setCellRenderer(new ButtonRenderer());
-		table.getColumn("Detalhar").setCellEditor(new ButtonEditor(new JCheckBox()));
-
 		table.getColumn("Excluir").setCellRenderer(new ButtonRenderer());
 		table.getColumn("Excluir").setCellEditor(new ButtonEditor(new JCheckBox()));
-
 		
 
 		JScrollPane painelTabela = new JScrollPane(table);
@@ -70,18 +78,100 @@ public class ListagemProdutos extends JanelaPadrao {
 		painelTabela.setBounds(46, 107, 722, 316);
 		getContentPane().add(painelTabela);
 
-		//preencherTabela(clientes);
+		
+		preencherTabela(ProdutoController.getInstance().allProdutos());
 
 	}
 	
-	public void criarJButton() {
-		btnVoltar = new JButton("Voltar");
-		btnVoltar.setIcon(new ImageIcon("C:\\Users\\ismae\\OneDrive\\Documentos\\ws-eclipse1\\br.com.projetoBD\\imagens\\voltar.png"));
-		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnVoltar.setBounds(46, 443, 115, 31);
-		getContentPane().add(btnVoltar);
+	public void preencherTabela(ArrayList<ProdutoDTO> array) {
+		limparTabela(modelo, table);
+
+		for(ProdutoDTO p: array) {
+			Object[] linha = new Object[9];
+
+			linha[0] = p.getCodigo();
+			linha[1] = p.getNome();
+			linha[2] = p.getQuantidade();
+			linha[3] = p.getDescricao();
+			linha[4] = p.getValor();
+			
+			
+			JButton btEditar = new JButton("Editar");
+			btEditar.setBackground(new Color(39, 228, 86));
+			btEditar.addActionListener(new OuvinteBotaoEditar(this,p));
+			linha[5] = btEditar;
+
+			JButton btExcluir = new JButton("Excluir");
+			btExcluir.setBackground(new Color(39, 228, 86));
+			btExcluir.addActionListener(new OuvinteBotaoExcluir(this, p));
+			linha[6] = btExcluir;
+			
+			modelo.addRow(linha);
+		}
+
 	}
 	
+	public static void limparTabela(DefaultTableModel modelo, JTable tabela) {
+		int cont = modelo.getRowCount();
+		for (int i = 0; i < cont; i++) {
+			modelo.removeRow(0);
+		}
+		tabela.repaint();
+	}
+	
+	
+	private class OuvinteBotaoExcluir implements ActionListener {
+
+		private ListagemProdutos janela;
+		private ProdutoDTO produtoDTO;
+
+		public OuvinteBotaoExcluir(ListagemProdutos janela, ProdutoDTO produtoDTO) {
+			this.janela = janela;
+			this.produtoDTO= produtoDTO;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+
+			ProdutoController.getInstance().remove(produtoDTO.getCodigo());
+			JOptionPane.showMessageDialog(null, "Produto removido com sucesso!");
+			janela.dispose();
+			new ListagemProdutos();
+		}
+
+	}
+	
+	private class OuvinteBotaoEditar implements ActionListener {
+
+		private ListagemProdutos janela;
+		private ProdutoDTO produtoDTO;
+
+		public OuvinteBotaoEditar(ListagemProdutos janela, ProdutoDTO produtoDTO) {
+			this.janela = janela;
+			this.produtoDTO = produtoDTO;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			janela.dispose();
+			new EditarProduto(produtoDTO);
+
+		}
+
+	}
+	
+	private class OuvinteBotaoVoltar implements ActionListener{
+		
+		private ListagemProdutos janela;
+		
+		public OuvinteBotaoVoltar(ListagemProdutos janelaAntiga) {
+			this.janela = janelaAntiga;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			janela.dispose();
+			new MenuListagem();
+		}	
+	}
 
 		
 

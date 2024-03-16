@@ -6,10 +6,9 @@ import model.Funcionario;
 
 public interface FuncionarioInterfaceDAO {
 	
-	Funcionario salve(Funcionario funcionario);
+	Funcionario saveOuUpdate(Funcionario funcionario);
 	Funcionario findByCPF(String cpf);
 	Funcionario remover(String cpf);
-	Funcionario update(Funcionario funcionario);
 	List<Funcionario> findAll();
 
 }

@@ -1,18 +1,35 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import DTO.FuncionarioDTO;
+
+@Entity
 public class Funcionario {
-	
-	private String nome;
-	private String telefone;
-	private String email;
+	@Id
 	private String CPF;
 	
+	@Column(name="Nome")
+	private String nome;
 	
-	public Funcionario(String nome, String telefone, String email, String cPF) {
-		this.nome = nome;
-		this.telefone = telefone;
-		this.email = email;
-		CPF = cPF;
+	@Column(name="Telefone")
+	private String telefone;
+	
+	@Column(name="Email")
+	private String email;
+	
+	
+	public Funcionario() {
+		
+	}
+	
+	public Funcionario(FuncionarioDTO funcionarioDTO) {
+		
+		this.nome = funcionarioDTO.getNome();
+		this.telefone = funcionarioDTO.getTelefone();
+		this.email = funcionarioDTO.getEmail();
+		CPF = funcionarioDTO.getCPF();
 	}
 	
 	public String getNome() {

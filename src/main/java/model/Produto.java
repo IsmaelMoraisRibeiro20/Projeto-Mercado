@@ -1,29 +1,49 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import DTO.ProdutoDTO;
+
+@Entity
 public class Produto {
-	
-	private Integer id;
+	@Id
+	@Column(name="Codigo")
+	private String codigo;
+
+	@Column(name="Nome")
 	private String nome;
+	
+	@Column(name="Quantidade")
 	private String quantidade;
+	
+	@Column(name="Descrição")
 	private String descricao;
+	
+	@Column(name="Valor")
 	private String valor;
 	
-	
-	public Produto(Integer id,String nome, String quantidade, String descricao, String valor) {
-		this.id = id;
-		this.nome = nome;
-		this.quantidade = quantidade;
-		this.descricao = descricao;
-		this.valor = valor;
+	public Produto() {
+		
 	}
 	
-	public Integer getId() {
-		return id;
+	public Produto(ProdutoDTO produtoDTO) {
+		this.codigo = produtoDTO.getCodigo();
+		this.nome = produtoDTO.getNome();
+		this.quantidade = produtoDTO.getQuantidade();
+		this.descricao = produtoDTO.getDescricao();
+		this.valor = produtoDTO.getValor();
+	}
+	
+	public String getCodigo() {
+		return codigo;
 	}
 
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCodigo(String codigoDeBarra) {
+		this.codigo = codigoDeBarra;
 	}
 
 

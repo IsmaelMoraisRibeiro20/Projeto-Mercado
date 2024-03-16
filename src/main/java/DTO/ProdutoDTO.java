@@ -1,18 +1,29 @@
 package DTO;
 
-public class Produto {
-	
+public class ProdutoDTO {
+	private String codigo;
 	private String nome;
 	private String quantidade;
 	private String descricao;
 	private String valor;
 	
 	
-	public Produto(String nome, String quantidade, String descricao, String valor) {
+	public ProdutoDTO(String codigo,String nome, String quantidade, String descricao, String valor) {
+		this.codigo = codigo;
 		this.nome = nome;
 		this.quantidade = quantidade;
 		this.descricao = descricao;
 		this.valor = valor;
+	}
+
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 
@@ -55,9 +66,4 @@ public class Produto {
 		this.valor = valor;
 	}
 	
-	
-	
-	
-	
-
 }

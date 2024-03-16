@@ -44,10 +44,12 @@ public class ListagemFuncionario extends JanelaPadrao {
 	}
 	
 	public void adicionarButton() {
+		OuvinteBotaoVoltar ouvinte = new OuvinteBotaoVoltar(this);
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.setIcon(new ImageIcon("C:\\Users\\ismae\\OneDrive\\Documentos\\ws-eclipse1\\br.com.projetoBD\\imagens\\voltar.png"));
 		btnVoltar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnVoltar.setBounds(44, 448, 115, 31);
+		btnVoltar.addActionListener(ouvinte);
 		getContentPane().add(btnVoltar);
 		
 	}
@@ -82,6 +84,20 @@ public class ListagemFuncionario extends JanelaPadrao {
 
 		//preencherTabela(clientes);
 
+	}
+	
+	private class OuvinteBotaoVoltar implements ActionListener{
 		
+		private ListagemFuncionario janela;
+		
+		public OuvinteBotaoVoltar(ListagemFuncionario janelaAntiga) {
+			this.janela = janelaAntiga;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			janela.dispose();
+			new MenuListagem();
+		}	
 	}
 }

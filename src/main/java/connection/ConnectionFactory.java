@@ -10,7 +10,5 @@ private static EntityManagerFactory emf = Persistence.createEntityManagerFactory
 	
 	public EntityManager getConnection() {
 		return emf.createEntityManager();
-
-	
 	}
 }

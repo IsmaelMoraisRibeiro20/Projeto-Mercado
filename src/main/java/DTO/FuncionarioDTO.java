@@ -39,8 +39,5 @@ public class FuncionarioDTO {
 	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
-	
-	
-	
 
 }

@@ -11,22 +11,44 @@ import model.Produto;
 public class FuncionarioDAO implements FuncionarioInterfaceDAO{
 	
 	EntityManager em = new ConnectionFactory().getConnection();
+	
+	private volatile static FuncionarioDAO instance;
 
-	public Funcionario salve(Funcionario funcionario) {
+	private FuncionarioDAO() {
+
+	}
+
+	public static FuncionarioDAO getInstance() {
+		if(instance == null) {
+			synchronized (FuncionarioDAO.class) {
+				if(instance == null) {
+					instance = new FuncionarioDAO();
+				}
+
+			}
+		}
+		return instance;
+	}
+
+	public Funcionario saveOuUpdate(Funcionario funcionario) {
 		
 		try {
-			em.getTransaction().begin();//inicio de transação 
-			em.persist(funcionario);//pesistir/persistencia
-			em.getTransaction().commit();//confirmação de transação
+			em.getTransaction().begin();
+			if(funcionario.getCPF() == null) {
+				em.persist(funcionario);
+			}else {
+				em.merge(funcionario);
+			}
 			
-		}catch(Exception e){
+			em.getTransaction().commit();
+		}catch(Exception e) {
 			System.err.println(e);
 			em.getTransaction().rollback();
-			
 		}finally {
-			em.close();	
+			em.close();
 		}
 		return funcionario;
+		
 	}
 
 	public Funcionario findByCPF(String cpf) {
@@ -63,23 +85,6 @@ public class FuncionarioDAO implements FuncionarioInterfaceDAO{
 		return funcionario;
 	}
 
-	public Funcionario update(Funcionario funcionario) {
-		try {
-			em.getTransaction().begin();
-			if(funcionario.getCPF() == null) {
-				em.persist(funcionario);
-			}else {
-				em.merge(funcionario);
-			}
-			
-			em.getTransaction().commit();
-		}catch(Exception e) {
-			System.err.println(e);
-		}finally {
-			em.close();
-		}
-		return funcionario;
-	}
 
 	public List<Funcionario> findAll() {
 		List<Funcionario> funcionario = null;

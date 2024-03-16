@@ -2,14 +2,14 @@ package DAO;
 
 import java.util.List;
 
+import DTO.ProdutoDTO;
 import model.Produto;
 
 public interface ProdutoInterfaceDAO {
 	
-	Produto salve(Produto produto);
-	Produto findById(Integer id);
-	Produto remover(Integer id);
-	Produto update(Produto produto);
+	Produto saveOuUpdate(Produto produto);
+	Produto findByCodigoDeBarra(String codigoDeBarra);
+	Produto remover(String p);
 	List<Produto> findAll();
 
 }

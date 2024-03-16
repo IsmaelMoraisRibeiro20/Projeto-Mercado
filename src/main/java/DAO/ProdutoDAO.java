@@ -5,36 +5,59 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import model.Produto;
 import connection.ConnectionFactory;
+import model.Produto;
 
 public class ProdutoDAO implements ProdutoInterfaceDAO{
-	
-	EntityManager em = new ConnectionFactory().getConnection();
+	private volatile static ProdutoDAO instance;
 
-	public Produto salve(Produto produto) {
+	private ProdutoDAO() {
+
+	}
+
+	public static ProdutoDAO getInstance() {
+		if(instance == null) {
+			synchronized (ProdutoDAO.class) {
+				if(instance == null) {
+					instance = new ProdutoDAO();
+				}
+
+			}
+		}
+		return instance;
+	}
+
+	public Produto saveOuUpdate(Produto produto) {
+		EntityManager em = new ConnectionFactory().getConnection();
 		try {
-			em.getTransaction().begin();//inicio de transação 
-			em.persist(produto);//pesistir/persistencia
-			em.getTransaction().commit();//confirmação de transação
+			em.getTransaction().begin();
 			
-		}catch(Exception e){
+			if(produto.getNome() == null) {
+				em.persist(produto);
+			}else {
+				em.merge(produto);
+			}
+			
+			em.getTransaction().commit();
+			
+		}catch(Exception e) {
 			System.err.println(e);
 			em.getTransaction().rollback();
-			
 		}finally {
-			em.close();	
+			em.close();
 		}
 		return produto;
+	
 
 	}
 	
 
-	public Produto findById(Integer id) {
+	public Produto findByCodigoDeBarra(String codigoDeBarra) {
+		EntityManager em = new ConnectionFactory().getConnection();
+		em.getTransaction().begin();
 		Produto produto = null;
-		
 		try {
-			produto = em.find(Produto.class, id);
+			produto = em.find(Produto.class, codigoDeBarra);
 		}catch(Exception e) {
 			System.out.println(e);
 		}finally {
@@ -44,11 +67,12 @@ public class ProdutoDAO implements ProdutoInterfaceDAO{
 		return produto;
 	}
 
-	public Produto remover(Integer id) {
+	public Produto remover(String codigo) {
+		EntityManager em = new ConnectionFactory().getConnection();
 		Produto produto = null;
 		
 		try {
-			produto = em.find(Produto.class, id); //esse metodo server para encontra o id do produto 
+			produto = em.find(Produto.class, codigo); //esse metodo server para encontra o id do produto 
 			
 			em.getTransaction().begin(); //inicio da transação para logo depois eu conseguir remover
 			em.remove(produto); //Aqui remove
@@ -64,31 +88,11 @@ public class ProdutoDAO implements ProdutoInterfaceDAO{
 		return produto;
 	}
 
-	public Produto update(Produto produto) {
-		
-		try {
-			em.getTransaction().begin();
-			if(produto.getId() == null) {
-				em.persist(produto);
-			}else {
-				em.merge(produto);
-			}
-			
-			em.getTransaction().commit();
-		}catch(Exception e) {
-			System.err.println(e);
-		}finally {
-			em.close();
-		}
-		return produto;
-	}
-
 	public List<Produto> findAll() {
-		
+		EntityManager em = new ConnectionFactory().getConnection();
 		List<Produto> produto = null;
-		
 		try {
-			produto = em.createQuery("from produto p ").getResultList();//se quebra foi aqui e a culpa é minha. 
+			produto = em.createQuery("from Produto p").getResultList();//se quebra foi aqui e a culpa é minha. 
 			
 		}catch(Exception e ) {
 			System.err.println(e);
@@ -98,5 +102,6 @@ public class ProdutoDAO implements ProdutoInterfaceDAO{
 		}
 		return produto;
 	}
+
 
 }

@@ -4,11 +4,21 @@ import java.awt.EventQueue;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
+
+import DTO.FuncionarioDTO;
+import DTO.ProdutoDTO;
+import controler.FuncionarioController;
+import controler.ProdutoController;
+
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 public class CadastroFuncionario extends JanelaPadrao{
@@ -28,6 +38,38 @@ public class CadastroFuncionario extends JanelaPadrao{
 		criarButton();
 	}
 	
+	public JTextField getCampoNome() {
+		return campoNome;
+	}
+
+	public void setCampoNome(JTextField campoNome) {
+		this.campoNome = campoNome;
+	}
+
+	public JTextField getCampoTelefone() {
+		return campoTelefone;
+	}
+
+	public void setCampoTelefone(JTextField campoTelefone) {
+		this.campoTelefone = campoTelefone;
+	}
+
+	public JTextField getCampoEmail() {
+		return campoEmail;
+	}
+
+	public void setCampoEmail(JTextField campoEmail) {
+		this.campoEmail = campoEmail;
+	}
+
+	public JTextField getCampoCPF() {
+		return campoCPF;
+	}
+
+	public void setCampoCPF(JTextField campoCPF) {
+		this.campoCPF = campoCPF;
+	}
+
 	public void criarJLabel() {
 		JLabel lblCadastrarFuncionario = new JLabel("CADASTRAR FUNCIONARIO\r\n");
 		lblCadastrarFuncionario.setForeground(Color.WHITE);
@@ -98,17 +140,70 @@ public class CadastroFuncionario extends JanelaPadrao{
 	}
 	
 	public void criarButton() {
+		OuvinteBotaoVoltar ouvinte = new OuvinteBotaoVoltar(this);
+		OuvinteBotaoSalvar ouvinteSalvar = new OuvinteBotaoSalvar(this);
 		buttonVoltar = new JButton("Voltar");
 		buttonVoltar.setBackground(new Color(255, 255, 255));
 		buttonVoltar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		buttonVoltar.setBounds(263, 427, 116, 31);
+		buttonVoltar.addActionListener(ouvinte);
 		getContentPane().add(buttonVoltar);
 		
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setBackground(new Color(240, 240, 240));
 		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnSalvar.setBounds(432, 427, 116, 31);
+		btnSalvar.addActionListener(ouvinteSalvar);
 		getContentPane().add(btnSalvar);
 	}
+	
+	private class OuvinteBotaoVoltar implements ActionListener{
+		
+		private CadastroFuncionario janela;
+		
+		public OuvinteBotaoVoltar(CadastroFuncionario janelaAntiga) {
+			this.janela = janelaAntiga;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			janela.dispose();
+			new Menu();
+		}	
+	}
+	
+	protected class OuvinteBotaoSalvar implements ActionListener {
+		private CadastroFuncionario janela;
+		private FuncionarioDTO funcionarioDTO;
+
+		public OuvinteBotaoSalvar(CadastroFuncionario janela) {
+			this.janela = janela;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+
+			String nome = janela.getCampoNome().getText();
+			String telefone = janela.getCampoNome().getText().replace("(", "").replace(")", "").replace("-", "").trim();;
+			String email = janela.getCampoEmail().getText();
+			String cpf = janela.getCampoCPF().getText().replace(".", "").replace("-", "").trim();;
+			
+			
+			if (nome.isEmpty() || telefone.isEmpty() || email.isEmpty() || cpf.isEmpty()) {
+				JOptionPane.showMessageDialog(janela, "Todos os campos devem ser preenchidos");
+ 
+			} else {
+				funcionarioDTO = new FuncionarioDTO(nome, telefone, email,cpf);
+				FuncionarioController.getInstance().save(funcionarioDTO);
+				JOptionPane.showMessageDialog(janela, "Funcionario cadastrado com sucesso!");
+				janela.dispose();
+				new Menu();
+				
+			}
+
+		}
+
+	}
+
 
 }
