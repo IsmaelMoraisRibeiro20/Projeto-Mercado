@@ -207,7 +207,6 @@ public class CadastrarProduto extends JanelaPadrao {
 			this.janela = janelaAntiga;
 		}
 		
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			janela.dispose();
 			new Menu();
@@ -222,7 +221,6 @@ public class CadastrarProduto extends JanelaPadrao {
 			this.janela = janela;
 		}
 
-		@Override
 		public void actionPerformed(ActionEvent e) {
 
 			

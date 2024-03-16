@@ -29,6 +29,9 @@ public class CadastroFuncionario extends JanelaPadrao{
 	private JTextField campoCPF;
 	private JButton buttonVoltar;
 	private JButton btnSalvar;
+	private JLabel tituloTelaCadastrarFuncionario;
+	private OuvinteBotaoVoltar ouvinteVoltar;
+	private OuvinteBotaoSalvar ouvinteSalvar;
 
 	
 	
@@ -38,6 +41,64 @@ public class CadastroFuncionario extends JanelaPadrao{
 		criarButton();
 	}
 	
+	
+	
+	public JButton getButtonVoltar() {
+		return buttonVoltar;
+	}
+
+
+
+	public void setButtonVoltar(JButton buttonVoltar) {
+		this.buttonVoltar = buttonVoltar;
+	}
+
+
+
+	public JButton getBtnSalvar() {
+		return btnSalvar;
+	}
+
+
+
+	public void setBtnSalvar(JButton btnSalvar) {
+		this.btnSalvar = btnSalvar;
+	}
+
+
+
+	public OuvinteBotaoVoltar getOuvinteVoltar() {
+		return ouvinteVoltar;
+	}
+
+	public void setOuvinteVoltar(OuvinteBotaoVoltar ouvinteVoltar) {
+		this.ouvinteVoltar = ouvinteVoltar;
+	}
+
+
+
+	public OuvinteBotaoSalvar getOuvinteSalvar() {
+		return ouvinteSalvar;
+	}
+
+
+
+	public void setOuvinteSalvar(OuvinteBotaoSalvar ouvinteSalvar) {
+		this.ouvinteSalvar = ouvinteSalvar;
+	}
+
+
+
+	public JLabel getTituloTelaCadastrarFuncionario() {
+		return tituloTelaCadastrarFuncionario;
+	}
+
+
+	public void setTituloTelaCadastrarFuncionario(JLabel tituloTelaCadastrarFuncionario) {
+		this.tituloTelaCadastrarFuncionario = tituloTelaCadastrarFuncionario;
+	}
+
+
 	public JTextField getCampoNome() {
 		return campoNome;
 	}
@@ -71,11 +132,11 @@ public class CadastroFuncionario extends JanelaPadrao{
 	}
 
 	public void criarJLabel() {
-		JLabel lblCadastrarFuncionario = new JLabel("CADASTRAR FUNCIONARIO\r\n");
-		lblCadastrarFuncionario.setForeground(Color.WHITE);
-		lblCadastrarFuncionario.setFont(new Font("Elephant", Font.BOLD, 25));
-		lblCadastrarFuncionario.setBounds(196, 50, 435, 34);
-		getContentPane().add(lblCadastrarFuncionario);
+		tituloTelaCadastrarFuncionario = new JLabel("CADASTRAR FUNCIONARIO\r\n");
+		tituloTelaCadastrarFuncionario.setForeground(Color.WHITE);
+		tituloTelaCadastrarFuncionario.setFont(new Font("Elephant", Font.BOLD, 25));
+		tituloTelaCadastrarFuncionario.setBounds(196, 50, 435, 34);
+		getContentPane().add(tituloTelaCadastrarFuncionario);
 		
 		
 		JLabel lblNome = new JLabel("Nome");
@@ -140,13 +201,13 @@ public class CadastroFuncionario extends JanelaPadrao{
 	}
 	
 	public void criarButton() {
-		OuvinteBotaoVoltar ouvinte = new OuvinteBotaoVoltar(this);
-		OuvinteBotaoSalvar ouvinteSalvar = new OuvinteBotaoSalvar(this);
+		ouvinteVoltar = new OuvinteBotaoVoltar(this);
+		ouvinteSalvar = new OuvinteBotaoSalvar(this);
 		buttonVoltar = new JButton("Voltar");
 		buttonVoltar.setBackground(new Color(255, 255, 255));
 		buttonVoltar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		buttonVoltar.setBounds(263, 427, 116, 31);
-		buttonVoltar.addActionListener(ouvinte);
+		buttonVoltar.addActionListener(ouvinteVoltar);
 		getContentPane().add(buttonVoltar);
 		
 		btnSalvar = new JButton("Salvar");
@@ -165,7 +226,6 @@ public class CadastroFuncionario extends JanelaPadrao{
 			this.janela = janelaAntiga;
 		}
 		
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			janela.dispose();
 			new Menu();
@@ -180,7 +240,6 @@ public class CadastroFuncionario extends JanelaPadrao{
 			this.janela = janela;
 		}
 
-		@Override
 		public void actionPerformed(ActionEvent e) {
 
 			String nome = janela.getCampoNome().getText();

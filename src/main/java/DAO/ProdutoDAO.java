@@ -31,7 +31,6 @@ public class ProdutoDAO implements ProdutoInterfaceDAO{
 		EntityManager em = new ConnectionFactory().getConnection();
 		try {
 			em.getTransaction().begin();
-			
 			if(produto.getNome() == null) {
 				em.persist(produto);
 			}else {

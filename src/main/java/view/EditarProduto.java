@@ -41,7 +41,6 @@ public class EditarProduto {
 			this.janela = janela;
 		}
 		
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			
 			if(e.getSource() == janela.getButtonVoltar()) {
@@ -61,7 +60,6 @@ public class EditarProduto {
 			//this.pedidoAntigo = pedidoAntigo;
 		}
 
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			
 			

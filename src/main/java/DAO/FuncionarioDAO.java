@@ -9,9 +9,6 @@ import model.Funcionario;
 import model.Produto;
 
 public class FuncionarioDAO implements FuncionarioInterfaceDAO{
-	
-	EntityManager em = new ConnectionFactory().getConnection();
-	
 	private volatile static FuncionarioDAO instance;
 
 	private FuncionarioDAO() {
@@ -31,6 +28,7 @@ public class FuncionarioDAO implements FuncionarioInterfaceDAO{
 	}
 
 	public Funcionario saveOuUpdate(Funcionario funcionario) {
+		EntityManager em = new ConnectionFactory().getConnection();
 		
 		try {
 			em.getTransaction().begin();
@@ -52,6 +50,8 @@ public class FuncionarioDAO implements FuncionarioInterfaceDAO{
 	}
 
 	public Funcionario findByCPF(String cpf) {
+		EntityManager em = new ConnectionFactory().getConnection();
+		em.getTransaction().begin();
 		Funcionario funcionario = null;
 		
 		try {
@@ -66,6 +66,7 @@ public class FuncionarioDAO implements FuncionarioInterfaceDAO{
 	}
 
 	public Funcionario remover(String cpf) {
+		EntityManager em = new ConnectionFactory().getConnection();
 		Funcionario funcionario = null;
 		
 		try {
@@ -87,10 +88,11 @@ public class FuncionarioDAO implements FuncionarioInterfaceDAO{
 
 
 	public List<Funcionario> findAll() {
+		EntityManager em = new ConnectionFactory().getConnection();
 		List<Funcionario> funcionario = null;
 		
 		try {
-			funcionario= em.createQuery("from funcionario f").getResultList();
+			funcionario= em.createQuery("from Funcionario f").getResultList();
 			
 		}catch(Exception e ) {
 			System.err.println(e);

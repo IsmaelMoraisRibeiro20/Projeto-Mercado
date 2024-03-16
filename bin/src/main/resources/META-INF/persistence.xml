@@ -5,11 +5,11 @@
 		transaction-type="RESOURCE_LOCAL">
 	
 		<class>model.Funcionario</class>
-		<class>model.Produto</class>	
+		<class>model.Produto</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/bdMercado" /> <!-- BD teste -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/teste" /> <!-- BD teste -->
 			<property name="javax.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
 			<property name="javax.persistence.jdbc.password" value="admin" /> <!-- DB Password -->
 

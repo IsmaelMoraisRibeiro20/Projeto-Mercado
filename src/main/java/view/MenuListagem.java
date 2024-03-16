@@ -65,7 +65,6 @@ public class MenuListagem extends JanelaPadrao {
 			this.janela = janelaAntiga;
 		}
 		
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			janela.dispose();
 			new Menu();
@@ -74,7 +73,6 @@ public class MenuListagem extends JanelaPadrao {
 
 	private class OuvinteBotoesDoMenu implements ActionListener {
 
-		@Override
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == funcionario) {

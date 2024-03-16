@@ -166,7 +166,6 @@ public class ListagemProdutos extends JanelaPadrao {
 			this.janela = janelaAntiga;
 		}
 		
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			janela.dispose();
 			new MenuListagem();

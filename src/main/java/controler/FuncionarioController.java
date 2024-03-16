@@ -1,8 +1,13 @@
 package controler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import DAO.FuncionarioDAO;
 import DTO.FuncionarioDTO;
+import DTO.ProdutoDTO;
 import model.Funcionario;
+import model.Produto;
 
 
 public class FuncionarioController {
@@ -28,15 +33,30 @@ public class FuncionarioController {
 		FuncionarioDAO.getInstance().saveOuUpdate(new Funcionario(funcionarioDTO));
 	}
 	
-	public void remover(FuncionarioDTO funcionarioDTO) {
-		FuncionarioDAO.getInstance().remover(funcionarioDTO.getCPF());
+	public void remover(String cpf) {
+		FuncionarioDAO.getInstance().remover(cpf);
 	}
 	
 	public void findByCPF(FuncionarioDTO funcionarioDTO) {
 		FuncionarioDAO.getInstance().findByCPF(funcionarioDTO.getCPF());
 	}
 	
-	public void findAll() {
-		FuncionarioDAO.getInstance().findAll();
+	public List<Funcionario> findAll() {
+		return FuncionarioDAO.getInstance().findAll();
+		
+	}
+	
+	public ArrayList<FuncionarioDTO> allFuncionarios(){
+		List<Funcionario> funcionario = findAll();
+		ArrayList<FuncionarioDTO> funcionariosDTO = new ArrayList<FuncionarioDTO>();
+		
+		for(int i = 0;i < funcionario.size();i++) {
+			FuncionarioDTO dto = new FuncionarioDTO(funcionario.get(i).getNome(), funcionario.get(i).getTelefone(),
+					funcionario.get(i).getEmail(), funcionario.get(i).getCPF());
+			
+			funcionariosDTO.add(dto);
+		}
+		
+		return funcionariosDTO;
 	}
 }
