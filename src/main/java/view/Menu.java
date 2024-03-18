@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
-
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

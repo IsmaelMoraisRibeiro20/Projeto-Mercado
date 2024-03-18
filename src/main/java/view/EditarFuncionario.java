@@ -17,6 +17,8 @@ public class EditarFuncionario {
 		this.funcionarioDTO = funcionarioDTO;
 		
 		cadastrarFuncionario = new CadastroFuncionario();
+		cadastrarFuncionario.getTituloTelaCadastrarFuncionario().setSize(262, 34);
+		cadastrarFuncionario.getTituloTelaCadastrarFuncionario().setLocation(268, 36);
 		cadastrarFuncionario.getTituloTelaCadastrarFuncionario().setText("Editar Funcionario");
 		
 		cadastrarFuncionario.getBtnSalvar().removeActionListener(cadastrarFuncionario.getOuvinteSalvar());
@@ -44,7 +46,7 @@ public class EditarFuncionario {
 			
 			if(e.getSource() == janela.getButtonVoltar()) {
 				this.janela.dispose();
-				new ListagemProdutos();
+				new ListagemFuncionario();
 		
 			}
 		}
@@ -74,7 +76,7 @@ public class EditarFuncionario {
 				
 			} else {
 				FuncionarioDTO funcionarioDTO = new FuncionarioDTO(nome,telefone,email,cpf);
-				FuncionarioController.getInstance().save(funcionarioDTO);;
+				FuncionarioController.getInstance().save(funcionarioDTO);
 				
 				JOptionPane.showMessageDialog(janela, "Funcionario atualizado com sucesso!");
 				janela.dispose();

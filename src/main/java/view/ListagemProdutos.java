@@ -11,8 +11,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import DAO.ProdutoDAO;
 import DTO.ProdutoDTO;
 import controler.ProdutoController;
 import util.ButtonEditor;

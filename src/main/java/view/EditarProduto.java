@@ -75,7 +75,7 @@ public class EditarProduto {
 				
 			} else {
 				ProdutoDTO produto = new ProdutoDTO(codigo,nome,quantidade,descricao,valor);
-				ProdutoController.getInstance().save(produto);;
+				ProdutoController.getInstance().save(produto);
 				
 				JOptionPane.showMessageDialog(janela, "Produto atualizado com sucesso!");
 				janela.dispose();

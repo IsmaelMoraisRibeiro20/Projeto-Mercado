@@ -27,7 +27,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
 public class ListagemFuncionario extends JanelaPadrao {
-
 	
 	private JPanel contentPane;
 	private JTable table;
@@ -61,7 +60,6 @@ public class ListagemFuncionario extends JanelaPadrao {
 		getContentPane().add(btnVoltar);
 		
 	}
-	
 	
 	
 	public void criarJTable() {
@@ -159,7 +157,7 @@ public class ListagemFuncionario extends JanelaPadrao {
 			FuncionarioController.getInstance().remover(funcionarioDto.getCPF());
 			JOptionPane.showMessageDialog(null, "Produto removido com sucesso!");
 			janela.dispose();
-			new ListagemProdutos();
+			new ListagemFuncionario();
 		}
 
 	}

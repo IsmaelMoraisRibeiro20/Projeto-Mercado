@@ -5,22 +5,17 @@ import java.awt.EventQueue;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
-
 import DTO.FuncionarioDTO;
-import DTO.ProdutoDTO;
 import controler.FuncionarioController;
-import controler.ProdutoController;
-
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+
 public class CadastroFuncionario extends JanelaPadrao{
 
 	private JTextField campoNome;
@@ -33,39 +28,28 @@ public class CadastroFuncionario extends JanelaPadrao{
 	private OuvinteBotaoVoltar ouvinteVoltar;
 	private OuvinteBotaoSalvar ouvinteSalvar;
 
-	
-	
 	public CadastroFuncionario() {
 		criarJLabel();
 		criarJTextField();
 		criarButton();
 	}
-	
-	
+
 	
 	public JButton getButtonVoltar() {
 		return buttonVoltar;
 	}
 
-
-
 	public void setButtonVoltar(JButton buttonVoltar) {
 		this.buttonVoltar = buttonVoltar;
 	}
-
-
 
 	public JButton getBtnSalvar() {
 		return btnSalvar;
 	}
 
-
-
 	public void setBtnSalvar(JButton btnSalvar) {
 		this.btnSalvar = btnSalvar;
 	}
-
-
 
 	public OuvinteBotaoVoltar getOuvinteVoltar() {
 		return ouvinteVoltar;
@@ -75,29 +59,21 @@ public class CadastroFuncionario extends JanelaPadrao{
 		this.ouvinteVoltar = ouvinteVoltar;
 	}
 
-
-
 	public OuvinteBotaoSalvar getOuvinteSalvar() {
 		return ouvinteSalvar;
 	}
-
-
 
 	public void setOuvinteSalvar(OuvinteBotaoSalvar ouvinteSalvar) {
 		this.ouvinteSalvar = ouvinteSalvar;
 	}
 
-
-
 	public JLabel getTituloTelaCadastrarFuncionario() {
 		return tituloTelaCadastrarFuncionario;
 	}
 
-
 	public void setTituloTelaCadastrarFuncionario(JLabel tituloTelaCadastrarFuncionario) {
 		this.tituloTelaCadastrarFuncionario = tituloTelaCadastrarFuncionario;
 	}
-
 
 	public JTextField getCampoNome() {
 		return campoNome;
@@ -243,9 +219,9 @@ public class CadastroFuncionario extends JanelaPadrao{
 		public void actionPerformed(ActionEvent e) {
 
 			String nome = janela.getCampoNome().getText();
-			String telefone = janela.getCampoNome().getText().replace("(", "").replace(")", "").replace("-", "").trim();;
+			String telefone = janela.getCampoTelefone().getText();
 			String email = janela.getCampoEmail().getText();
-			String cpf = janela.getCampoCPF().getText().replace(".", "").replace("-", "").trim();;
+			String cpf = janela.getCampoCPF().getText();
 			
 			
 			if (nome.isEmpty() || telefone.isEmpty() || email.isEmpty() || cpf.isEmpty()) {

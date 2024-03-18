@@ -91,7 +91,7 @@ public class ProdutoDAO implements ProdutoInterfaceDAO{
 		EntityManager em = new ConnectionFactory().getConnection();
 		List<Produto> produto = null;
 		try {
-			produto = em.createQuery("from Produto p").getResultList();//se quebra foi aqui e a culpa é minha. 
+			produto = em.createQuery("from Produto p").getResultList();
 			
 		}catch(Exception e ) {
 			System.err.println(e);
